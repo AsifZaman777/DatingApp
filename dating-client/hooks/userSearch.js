@@ -1,17 +1,22 @@
 import { useState, useEffect } from 'react';
 
-const useSearchById = (name) => {
+const useSearchById = (term, searchType) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        const fetchUserById = async () => {
-            if (!name) return; //if no name is provided
+        const fetchUser = async () => {
+            if (!term) return; // If no search term is provided
             setLoading(true);
-            setError(null); //reset error state
+            setError(null); // Reset error state
             try {
-                const response = await fetch(`http://localhost:5069/api/users/name/${name}`);
+                // Determine the API endpoint based on the search type
+                const endpoint = searchType === 'name'
+                    ? `http://localhost:5069/api/users/name/${term}`
+                    : `http://localhost:5069/api/users/id/${term}`; // Adjust this to your actual endpoint for ID
+
+                const response = await fetch(endpoint);
                 if (!response.ok) {
                     throw new Error('User not found');
                 }
@@ -24,8 +29,8 @@ const useSearchById = (name) => {
             setLoading(false);
         };
 
-        fetchUserById();
-    }, [name]);
+        fetchUser();
+    }, [term, searchType]); 
 
     return { user, loading, error };
 };
