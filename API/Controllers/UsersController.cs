@@ -39,7 +39,7 @@ public class UsersController(DataContext context) : ControllerBase
     }
 
     //search by id
-    [HttpGet("{id:int}")]
+    [HttpGet("id/{id:int}")]
     public async Task<ActionResult<AppUser>> GetUser(int id)
     {
         var user = await context.Users.FindAsync(id);
@@ -48,7 +48,7 @@ public class UsersController(DataContext context) : ControllerBase
     }
 
     //search by name
-    [HttpGet("{name}")]
+    [HttpGet("name/{name}")]
     public async Task<ActionResult> GetUser(string name)
     {
         var user = await context.Users.FirstOrDefaultAsync(u => u.Username.ToLower() == name.ToLower());
