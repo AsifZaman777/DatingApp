@@ -7,9 +7,9 @@ const useSearchById = (id) => {
 
     useEffect(() => {
         const fetchUserById = async () => {
-            if (!id) return; // Don't search if no ID is provided
+            if (!id) return; //if no id is provided
             setLoading(true);
-            setError(null); // Clear any previous errors
+            setError(null); //reset error state
             try {
                 const response = await fetch(`http://localhost:5069/api/users/id/${id}`);
                 if (!response.ok) {

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import useFetchUsers from '../../hooks/fetchUsersHook'; // Adjust the path as necessary
 import useSearchById from '../../hooks/searchById'; // Import the searchById hook
 import SkeletonCard from '../components/SkeletonCard'; // Adjust the path as necessary
@@ -6,29 +6,36 @@ import Navbar from '../components/Navbar'; // Import the Navbar component
 
 const Home = () => {
     const { users, loading: usersLoading, error: usersError } = useFetchUsers();
-    const [searchTerm, setSearchTerm] = useState(''); // State for search term
-    const { user: searchedUser, loading: searchLoading, error: searchError } = useSearchById(searchTerm); // Use the searchById hook
+    const [searchTerm, setSearchTerm] = useState('');
+    const [searchInput, setSearchInput] = useState(''); // New state for input field
+    const { user: searchedUser, loading: searchLoading, error: searchError, searchUserById } = useSearchById(searchTerm); // Hook with searchUserById
 
-    // Function to handle search input change
-    const handleSearchChange = (e) => {
-        setSearchTerm(e.target.value); // Update the search term when input changes
+
+
+    const handleInputChange = (e) => {
+        setSearchInput(e.target.value); 
+    };
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            setSearchTerm(searchInput); 
+            searchUserById(searchInput); 
+        }
     };
 
     // Filter users based on search term
     const filteredUsers = searchTerm
         ? searchedUser
-            ? [searchedUser] // If search term is present and user is found, show only that user
+            ? [searchedUser] 
             : []
-        : users; // If no search term, show all users
+        : users;
 
     if (usersLoading || searchLoading) {
-        // Render skeleton cards while loading
         return (
             <div className="min-h-screen bg-black p-8">
                 <Navbar />
                 <h1 className="text-3xl font-bold text-center text-white mb-8">Our Users</h1>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-                    {/* Render multiple skeleton cards */}
                     {Array.from({ length: 8 }).map((_, index) => (
                         <SkeletonCard key={index} />
                     ))}
@@ -38,7 +45,26 @@ const Home = () => {
     }
 
     if (usersError || searchError) {
-        return <p className="text-red-500">Error: {usersError || searchError}</p>;
+        return (
+            <div className="min-h-screen bg-black p-8">
+                <Navbar />
+                <h1 className="text-3xl font-bold text-center text-white mb-8">Our Users</h1>
+                <p className="text-center text-white">
+                   No users found with this ID.
+                </p>
+                 {/* Search Bar */}
+            <div className="mb-8">
+                <input
+                    type="text"
+                    placeholder="Search user by ID..."
+                    value={searchInput}
+                    onChange={handleInputChange} 
+                    onKeyDown={handleKeyDown} 
+                    className="input input-bordered w-full max-w-xs text-pink-200"
+                />
+            </div>
+            </div>
+        );
     }
 
     return (
@@ -49,10 +75,11 @@ const Home = () => {
             {/* Search Bar */}
             <div className="mb-8">
                 <input
-                    type="number"
+                    type="text"
                     placeholder="Search user by ID..."
-                    value={searchTerm}
-                    onChange={handleSearchChange}
+                    value={searchInput}
+                    onChange={handleInputChange} 
+                    onKeyDown={handleKeyDown} 
                     className="input input-bordered w-full max-w-xs text-pink-200"
                 />
             </div>
@@ -81,6 +108,9 @@ const Home = () => {
                     ))}
                 </div>
             )}
+
+           
+          
         </div>
     );
 };
