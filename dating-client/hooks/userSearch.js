@@ -11,7 +11,6 @@ const useSearchById = (term, searchType) => {
             setLoading(true);
             setError(null); // Reset error state
             try {
-                // Determine the API endpoint based on the search type
                 const endpoint = searchType === 'name'
                     ? `http://localhost:5069/api/users/name/${term}`
                     : `http://localhost:5069/api/users/id/${term}`; // Adjust this to your actual endpoint for ID
