@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'; // Make sure to install react-router-do
 const Navbar = ({ navbarScrolled }) => {
     return (
         <div
-            className={`navbar py-3 shadow-lg fixed w-full top-0 left-0 z-20 transition-colors duration-300 md:px-20 ${
+            className={`navbar py-3 shadow-md shadow-pink-300 fixed w-full top-0 left-0 z-20 transition-colors duration-300 md:px-20 ${
                 navbarScrolled
                     ? "bg-black bg-opacity-80 backdrop-blur-xl text-pink-500 font-medium"
                     : "bg-black bg-opacity-80 backdrop-blur-lg text-pink-500 font-medium"

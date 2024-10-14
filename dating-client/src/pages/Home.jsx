@@ -27,14 +27,11 @@ const Home = () => {
     return (
         <div className="min-h-screen bg-black p-8">
             <Navbar />
-            <h1 className="text-3xl font-bold text-center text-white mb-8">Our Users</h1>
+            <h1 className="text-3xl font-bold text-center text-white mb-8">Users</h1>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
                 {users.map((user) => (
-                    <div 
-                        key={user.id} 
-                        className="card bg-neutral-800 shadow-lg transition-transform transform hover:scale-105"
-                    >
+                    <div className="card bg-base-100 w-96 shadow-xl" key={user.id}>
                         <figure>
                             <img
                                 src={`https://randomuser.me/api/portraits/men/${user.id}.jpg`} // Placeholder image
@@ -43,8 +40,8 @@ const Home = () => {
                             />
                         </figure>
                         <div className="card-body">
-                            <h2 className="text-xl font-bold text-white mb-2">{user.username}</h2>
-                            <p className="text-gray-400">{user.email}</p>
+                            <h2 className="card-title">{user.username}</h2>
+                            <p>If a dog chews shoes whose shoes does he choose?</p>
                             <div className="card-actions justify-end">
                                 <button className="btn btn-primary">View Profile</button>
                             </div>
