@@ -1,7 +1,40 @@
-<h1>{{ title }}</h1>
+<html>
+<head>
+  <style>
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
 
-<ol>
-  <li *ngFor="let user of users">
-     {{ user.name }} 
-  </li>
-</ol>
+    .card {
+      background-color: #f8f8f8;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: transform 0.2s;
+    }
+
+      .card:hover {
+        transform: translateY(-10px);
+      }
+
+      .card h3 {
+        margin: 0;
+        font-size: 18px;
+        color: #333;
+      }
+  </style>
+</head>
+<body>
+  <p>The users are given below</p>
+
+  <div class="card-container">
+    <div *ngFor="let user of users" class="card">
+      <h3>{{ user.username }}</h3>
+    </div>
+  </div>
+</body>
+</html>

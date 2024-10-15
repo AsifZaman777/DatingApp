@@ -24,10 +24,18 @@ builder.Services.AddCors(options =>
         });
 });
 
+
+
 var app = builder.Build();
 
 // Enable CORS
 app.UseCors("AllowReactApp");
+
+//Enable CORS for angular
+
+app.UseCors(
+    x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200")
+    );
 
 // Use authorization if needed
 app.UseAuthorization();
