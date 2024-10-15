@@ -13,7 +13,7 @@ const useSearchById = (term, searchType) => {
             try {
                 const endpoint = searchType === 'name'
                     ? `http://localhost:5069/api/users/name/${term}`
-                    : `http://localhost:5069/api/users/id/${term}`; // Adjust this to your actual endpoint for ID
+                    : `http://localhost:5069/api/users/id/${term}`;
 
                 const response = await fetch(endpoint);
                 if (!response.ok) {
