@@ -6,8 +6,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
 
-[ApiController]
-[Route("api/[controller]")] //api/users endpoint
 
 
 //conventional way 
@@ -29,7 +27,7 @@ namespace API.Controllers;
 
 
 // c#12 way using primary constructor
-public class UsersController(DataContext context) : ControllerBase
+public class UsersController(DataContext context) : BaseApiController
 {
     [HttpGet]
     public async Task<ActionResult<IEnumerable<AppUser>>> GetUser()
