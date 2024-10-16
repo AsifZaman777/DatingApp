@@ -1,30 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using API.Data;
 using API.Models;
-using System.Data.Entity;
 using System.Security.Cryptography;
 using System.Text;
 using API.DTOs;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
     public class AccountController(DataContext context) : BaseApiController
     {
 
-        //check if user exists
-       
-
         [HttpPost("register")] //api/account/register
-
-
-        //public async Task<ActionResult<AppUser>> Register([FromQuery]string username, string password) //conventional way without DTO
-
-
-        //using DTOs
         public async Task<ActionResult<AppUser>> Register(RegisterDto registerDto) //using DTO
         {
-
-            if (UserExists(registerDto.Username)) return BadRequest("Username is taken");
+            // Make UserExists asynchronous
+            if (await UserExists(registerDto.Username)) return BadRequest("Username is taken");
 
             using var hmac = new HMACSHA512();
 
@@ -40,13 +31,30 @@ namespace API.Controllers
             return Ok(user);
         }
 
-        private bool UserExists(string username)
+        [HttpPost("login")]
+        public async Task<ActionResult<AppUser>> Login(LoginDto loginDto)
         {
-            return context.Users.Any(u => u.Username.ToLower() == username.ToLower());
+            var user = await context.Users
+                .FirstOrDefaultAsync(u => u.Username == loginDto.Username.ToLower());
+
+            if (user == null) return Unauthorized("Invalid username");
+
+            using var hmac = new HMACSHA512(user.PasswordSalt);
+
+            var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDto.Password));
+
+            for (int i = 0; i < computedHash.Length; i++)
+            {
+                if (computedHash[i] != user.PasswordHash[i]) return Unauthorized("Invalid password");
+            }
+
+            return Ok(user);
         }
 
-
-
-
+        // Asynchronous version of UserExists
+        private async Task<bool> UserExists(string username)
+        {
+            return await context.Users.AnyAsync(u => u.Username.ToLower() == username.ToLower());
+        }
     }
 }
