@@ -1,5 +1,10 @@
 using API.Data;
+using API.Interfaces;
+using API.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+//use jwt bearer
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +29,9 @@ builder.Services.AddCors(options =>
         });
 });
 
+builder.Services.AddScoped<ITokenService, TokenService>(); // add token service to the container
+
+// authentication
 
 
 var app = builder.Build();
@@ -36,6 +44,7 @@ app.UseCors("AllowReactApp");
 app.UseCors(
     x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200")
     );
+
 
 // Use authorization if needed
 app.UseAuthorization();
