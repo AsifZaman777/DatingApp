@@ -27,11 +27,11 @@ namespace API.Controllers;
 //}
 
 
-[Authorize]
+
 // c#12 way using primary constructor
 public class UsersController(DataContext context) : BaseApiController
 {
-    [AllowAnonymous]
+    [AllowAnonymous]  
     [HttpGet]
     public async Task<ActionResult<IEnumerable<AppUser>>> GetUser()
     {
@@ -41,7 +41,7 @@ public class UsersController(DataContext context) : BaseApiController
 
 
     //search by id
-    [AllowAnonymous]
+    [Authorize]
     [HttpGet("id/{id:int}")]
     public async Task<ActionResult<AppUser>> GetUser(int id)
     {
@@ -51,7 +51,7 @@ public class UsersController(DataContext context) : BaseApiController
     }
 
     //search by name
-    [AllowAnonymous]
+    [Authorize]
     [HttpGet("name/{name}")]
     public async Task<ActionResult> GetUser(string name)
     {
