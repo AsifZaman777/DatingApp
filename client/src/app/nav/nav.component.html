@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-lg bg-black py-3"> <!-- Added top and bottom padding -->
+  <div class="container">
+    <a class="navbar-brand text-white" href="#">Dating App</a>
+    <button class="navbar-toggler text-pink" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-4 mb-lg-0 p-lg-3"> <!-- Increased padding around the nav items for larger screens -->
+        <li class="nav-item">
+          <a class="nav-link active text-pink hover-underline-animation mx-lg-3" aria-current="page" href="#">Matches</a> 
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-pink hover-underline-animation mx-lg-3" href="#">Lists</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-pink hover-underline-animation mx-lg-3" href="#">Messages</a>
+        </li>
+      </ul>
+      <form #loginForm="ngForm" (ngSubmit)="login()" class="d-flex align-items-center" role="search"> 
+        <input name="username" 
+        [(ngModel)]="model.username" 
+        class="form-control me-2 p-2" 
+        type="text" 
+        placeholder="Username" 
+        aria-label="Username" required>
+        
+        <input name="password" 
+        [(ngModel)]="model.password" 
+        class="form-control me-2 p-2" 
+        type="password" 
+        placeholder="Password" 
+        aria-label="Password" required> 
+        <button class="btn btn-pink-gradient px-4 py-2" type="submit">Login</button> 
+      </form>
+    </div>
+  </div>
+</nav>

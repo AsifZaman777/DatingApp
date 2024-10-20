@@ -1,0 +1,56 @@
+/* Custom Black and Pink Theme */
+.bg-black {
+    background-color: #000000 !important;
+}
+
+.text-pink {
+    color: #ff69b4 !important; /* Pink text color */
+}
+
+.nav-link {
+    position: relative;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.hover-underline-animation::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #ff69b4; /* Pink underline color */
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.hover-underline-animation:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+/* Button Styling */
+.btn-pink-gradient {
+    background: linear-gradient(45deg, #ff69b4, #ff1493); /* Pink gradient */
+    border: none;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(255, 105, 180, 0.3); /* Subtle shadow */
+}
+
+.btn-pink-gradient:hover {
+    background: linear-gradient(45deg, #ff1493, #ff69b4); /* Reverse gradient on hover */
+    box-shadow: 0 6px 12px rgba(255, 105, 180, 0.5); /* Stronger shadow on hover */
+    transform: scale(1.05); /* Slight scale effect on hover */
+}
+
+/* Textbox Focus Effects */
+.form-control:focus {
+    border-color: #ff69b4;
+    box-shadow: 0 0 5px rgba(255, 105, 180, 0.5); /* Pink glow effect */
+}

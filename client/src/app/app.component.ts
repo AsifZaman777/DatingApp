@@ -2,11 +2,13 @@ import { Component, OnInit, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NgFor } from '@angular/common';
+import { NavComponent } from './nav/nav.component';
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NgFor],
+  imports: [RouterOutlet, NgFor, NavComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'] // Fixed 'styleUrl' to 'styleUrls'
 })
