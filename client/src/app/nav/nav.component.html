@@ -16,22 +16,34 @@
           <a class="nav-link text-pink hover-underline-animation mx-lg-3" href="#">Messages</a>
         </li>
       </ul>
+      
       <form #loginForm="ngForm" (ngSubmit)="login()" class="d-flex align-items-center" role="search"> 
         <input name="username" 
-        [(ngModel)]="model.username" 
-        class="form-control me-2 p-2" 
-        type="text" 
-        placeholder="Username" 
-        aria-label="Username" required>
+          [(ngModel)]="model.username" 
+          class="form-control me-2 p-2" 
+          type="text" 
+          placeholder="Username" 
+          aria-label="Username" 
+          required>
         
         <input name="password" 
-        [(ngModel)]="model.password" 
-        class="form-control me-2 p-2" 
-        type="password" 
-        placeholder="Password" 
-        aria-label="Password" required> 
+          [(ngModel)]="model.password" 
+          class="form-control me-2 p-2" 
+          type="password" 
+          placeholder="Password" 
+          aria-label="Password" 
+          required> 
+        
         <button class="btn btn-pink-gradient px-4 py-2" type="submit">Login</button> 
+      
+        <!-- Warning message div -->
+        <div *ngIf="showWarning" 
+             class="alert alert-danger border-warning" 
+             style="width: 100%; background-color: #fff3cd; color: #856404; padding: 15px; margin-top: 15px; border-radius: 8px; margin-left: 20px;">
+          <strong>Warning!</strong> Please fill out both Username and Password fields!
+        </div>
       </form>
+      
     </div>
   </div>
 </nav>

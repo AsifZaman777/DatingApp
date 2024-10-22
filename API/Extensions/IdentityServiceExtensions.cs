@@ -9,7 +9,7 @@ namespace API.Extensions
         public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration config)
         {
             // authentication
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            services.AddAuthentication()
                 .AddJwtBearer(options =>
                 {
                     var tokenKey = config["TokenKey"] ?? throw new Exception("TokenKey is missing from appsettings.json");
@@ -23,7 +23,6 @@ namespace API.Extensions
                 });
 
             return services;
-
         }
     }
 }
