@@ -11,28 +11,38 @@ import { AccountService } from '../_services/account.service';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent {
-   model: any = {};
-   showWarning: boolean = false; // show warning flag
-   loggedIn: boolean = false; 
-   private accountService= inject(AccountService);
+  model: any = {};
+  showWarning: boolean = false;
+  loggedIn: boolean = false; 
+  private accountService = inject(AccountService);
 
-   login() {
-     if (!this.model.username || !this.model.password || 
-         this.model.username.trim() === '' || this.model.password.trim() === '') {
-       this.showWarning = true; 
-     } else {
-       this.showWarning = false; 
-        this.accountService.login(this.model).subscribe(
-          {
-            next: (response) => {
-              console.log(response);
-              this.loggedIn = true;
-            },
-            error: (error) => {
-              console.log(error);
-            }
-          }  
-        )
-     }
-   }
+ 
+  hideToastTimeout() {
+    setTimeout(() => {
+      this.showWarning = false;
+    }, 3000); 
+  }
+
+  login() {
+    if (!this.model.username || !this.model.password || 
+        this.model.username.trim() === '' || this.model.password.trim() === '') {
+      this.showWarning = true; 
+      this.hideToastTimeout(); 
+    } else {
+      this.showWarning = false; 
+      this.accountService.login(this.model).subscribe({
+        next: (response) => {
+          console.log(response);
+          this.loggedIn = true;
+        },
+        error: (error) => { 
+          console.log(error);
+        }
+      });
+    }
+  }
+
+  logout() {
+    this.loggedIn = false;
+  }
 }

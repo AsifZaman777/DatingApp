@@ -1,23 +1,31 @@
-<nav class="navbar navbar-expand-lg bg-black py-3"> <!-- Added top and bottom padding -->
+<nav class="navbar navbar-expand-lg bg-black py-3"> 
   <div class="container">
-    <a class="navbar-brand text-white" href="#">Dating App</a>
+    <a class="navbar-brand text-white fs-3" href="#">Dating App</a>
+    
     <button class="navbar-toggler text-pink" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+    
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-4 mb-lg-0 p-lg-3"> <!-- Increased padding around the nav items for larger screens -->
+      
+      <!-- Logged in conditional items -->
+      <ul class="navbar-nav me-auto p-lg-1" *ngIf="loggedIn"> 
         <li class="nav-item">
-          <a class="nav-link active text-pink hover-underline-animation mx-lg-3" aria-current="page" href="#">Matches</a> 
+          <a class="nav-link active text-pink hover-underline-animation hover-scale mx-lg-3 fs-6" aria-current="page" href="#">Matches</a> 
         </li>
         <li class="nav-item">
-          <a class="nav-link text-pink hover-underline-animation mx-lg-3" href="#">Lists</a>
+          <a class="nav-link text-pink hover-underline-animation hover-scale mx-lg-3 fs-6" href="#">Lists</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-pink hover-underline-animation mx-lg-3" href="#">Messages</a>
+          <a class="nav-link text-pink hover-underline-animation hover-scale mx-lg-3 fs-6" href="#">Messages</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-pink hover-underline-animation hover-scale mx-lg-3 fs-6" (click)="logout()" href="#">Logout</a>
         </li>
       </ul>
-      
-      <form #loginForm="ngForm" (ngSubmit)="login()" class="d-flex align-items-center" role="search"> 
+
+      <!-- Not logged in conditional items -->
+      <form #loginForm="ngForm" (ngSubmit)="login()" class="d-flex align-items-center ms-auto" role="search" *ngIf="!loggedIn"> 
         <input name="username" 
           [(ngModel)]="model.username" 
           class="form-control me-2 p-2" 
@@ -35,15 +43,20 @@
           required> 
         
         <button class="btn btn-pink-gradient px-4 py-2" type="submit">Login</button> 
-      
-        <!-- Warning message div -->
-        <div *ngIf="showWarning" 
-             class="alert alert-danger border-warning" 
-             style="width: 100%; background-color: #fff3cd; color: #856404; padding: 15px; margin-top: 15px; border-radius: 8px; margin-left: 20px;">
-          <strong>Warning!</strong> Please fill out both Username and Password fields!
+        
+        <!-- Toast warning message -->
+        <div class="toast-container position-fixed end-0 p-3" id="toast-container" *ngIf="showWarning" style="top: 5%; z-index: 1050;">
+          <div class="toast show align-items-center text-bg-warning border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+              <div class="toast-body">
+                <strong>Warning!</strong> Please fill out both Username and Password fields!
+              </div>
+              <button type="button" class="btn-close me-2 m-auto" (click)="showWarning = false" aria-label="Close"></button>
+            </div>
+          </div>
         </div>
       </form>
-      
+
     </div>
   </div>
 </nav>
