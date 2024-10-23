@@ -44,20 +44,20 @@
 
 /* Button Styling */
 .btn-pink-gradient {
-    background: linear-gradient(45deg, #ff69b4, #ff1493); /* Pink gradient */
-    border: none;
+    background: transparent;
+    border: pink solid 2px;
     color: white;
     padding: 8px 20px;
-    border-radius: 25px;
+    border-radius: 5px;
     font-size: 16px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(255, 105, 180, 0.3); /* Subtle shadow */
+    transition: all 0.1s ease;
+    box-shadow: 0 4px 6px rgba(255, 105, 180, 0.3); 
 }
 
 .btn-pink-gradient:hover {
-    background: linear-gradient(45deg, #ff1493, #ff69b4); /* Reverse gradient on hover */
-    box-shadow: 0 6px 12px rgba(255, 105, 180, 0.5); /* Stronger shadow on hover */
-    transform: scale(1.05); /* Slight scale effect on hover */
+
+    box-shadow: white 0 0 20px; /* White glow effect */
+    background: linear-gradient(45deg, #ff69b4, #ceaabd); /* Pink gradient */
 }
 
 /* Textbox Focus Effects */

@@ -1,12 +1,13 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgIf } from '@angular/common';
+import { NgIf, CommonModule } from '@angular/common'; // Replace BrowserAnimationsModule with CommonModule
 import { AccountService } from '../_services/account.service';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 @Component({
   selector: 'app-nav',
   standalone: true,
-  imports: [FormsModule, NgIf],
+  imports: [FormsModule, NgIf, CommonModule, BsDropdownModule], // CommonModule imported
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css']
 })
@@ -16,7 +17,6 @@ export class NavComponent {
   loggedIn: boolean = false; 
   private accountService = inject(AccountService);
 
- 
   hideToastTimeout() {
     setTimeout(() => {
       this.showWarning = false;

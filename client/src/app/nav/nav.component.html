@@ -19,10 +19,18 @@
         <li class="nav-item">
           <a class="nav-link text-pink hover-underline-animation hover-scale mx-lg-3 fs-6" href="#">Messages</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link text-pink hover-underline-animation hover-scale mx-lg-3 fs-6" (click)="logout()" href="#">Logout</a>
-        </li>
       </ul>
+
+      <!-- User Dropdown using ngx-bootstrap -->
+      <div class="ms-auto" *ngIf="loggedIn" class="btn-group" dropdown>
+        <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic">
+          Welcome, {{ model.username }} <span class="caret"></span>
+        </button>
+        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+          <li role="menuitem"><a class="dropdown-item" href="#">Edit Profile</a></li>
+          <li role="menuitem"><a class="dropdown-item" (click)="logout()">Logout</a></li>
+        </ul>
+      </div>
 
       <!-- Not logged in conditional items -->
       <form #loginForm="ngForm" (ngSubmit)="login()" class="d-flex align-items-center ms-auto" role="search" *ngIf="!loggedIn"> 
@@ -43,20 +51,19 @@
           required> 
         
         <button class="btn btn-pink-gradient px-4 py-2" type="submit">Login</button> 
-        
-        <!-- Toast warning message -->
-        <div class="toast-container position-fixed end-0 p-3" id="toast-container" *ngIf="showWarning" style="top: 5%; z-index: 1050;">
-          <div class="toast show align-items-center text-bg-warning border-0" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="d-flex">
-              <div class="toast-body">
-                <strong>Warning!</strong> Please fill out both Username and Password fields!
-              </div>
-              <button type="button" class="btn-close me-2 m-auto" (click)="showWarning = false" aria-label="Close"></button>
-            </div>
-          </div>
-        </div>
       </form>
 
+      <!-- Toast warning message -->
+      <div class="toast-container position-fixed end-0 p-3" id="toast-container" *ngIf="showWarning" style="top: 5%; z-index: 1050;">
+        <div class="toast show align-items-center text-bg-warning border-0" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="d-flex">
+            <div class="toast-body">
+              <strong>Warning!</strong> Please fill out both Username and Password fields!
+            </div>
+            <button type="button" class="btn-close me-2 m-auto" (click)="showWarning = false" aria-label="Close"></button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </nav>
