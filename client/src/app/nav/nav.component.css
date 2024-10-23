@@ -1,16 +1,27 @@
 /* Custom Black and Pink Theme */
 .bg-black {
-    background-color: #000000 !important;
+    background-color: #000000 ; 
+    box-shadow: 
+        0 0 10px rgba(255, 255, 255, 0.1),  /* Inner white glow */
+        0 0 20px #ff99d8,
+        0 0 30px rgba(248, 129, 184, 0.1),  /* More spread-out glow */
+        0 0 40px rgb(209, 75, 158, 0.1);  /* Final, softest glow */
 }
 
 .text-pink {
-    color: #ff69b4 !important; /* Pink text color */
+    color: #ff69b4 ; 
 }
 
 .nav-link {
     position: relative;
     text-decoration: none;
     transition: color 0.3s ease;
+
+}
+
+.nav-link.active {
+    color: #ff69b4; 
+    font-weight: bold; 
 }
 
 .hover-underline-animation::after {
@@ -21,14 +32,16 @@
     height: 2px;
     bottom: 0;
     left: 0;
-    background-color: #ff69b4; /* Pink underline color */
+    background-color: #ff69b4; 
     transform-origin: bottom right;
     transition: transform 0.25s ease-out;
+ 
 }
 
 .hover-underline-animation:hover::after {
     transform: scaleX(1);
     transform-origin: bottom left;
+
 }
 .hover-scale {
     transition: transform 0.3s ease-in-out;
@@ -38,9 +51,6 @@
     transform: scale(1.1); /* Scales the text to 110% on hover */
   }
 
-
-  
-  
 
 /* Button Styling */
 .btn-pink-gradient {
