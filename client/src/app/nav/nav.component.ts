@@ -14,8 +14,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 export class NavComponent {
   model: any = {};
   showWarning: boolean = false;
-  loggedIn: boolean = false; 
-  private accountService = inject(AccountService);
+  accountService = inject(AccountService);
 
   hideToastTimeout() {
     setTimeout(() => {
@@ -33,7 +32,6 @@ export class NavComponent {
       this.accountService.login(this.model).subscribe({
         next: (response) => {
           console.log(response);
-          this.loggedIn = true;
         },
         error: (error) => { 
           console.log(error);
@@ -43,6 +41,6 @@ export class NavComponent {
   }
 
   logout() {
-    this.loggedIn = false;
+    this.accountService.logout();
   }
 }

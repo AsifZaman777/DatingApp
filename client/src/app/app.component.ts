@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NgFor } from '@angular/common';
 import { NavComponent } from './nav/nav.component';
+import { AccountService } from './_services/account.service';
 
 
 @Component({
@@ -16,8 +17,24 @@ export class AppComponent implements OnInit {
   http = inject(HttpClient);
   title = 'Dating app';
   users: any;
+  private accountService = inject(AccountService);
 
   ngOnInit(): void {
+    this.getUsers();
+    this.setCurrentUser();
+  }
+
+  setCurrentUser() {
+    const user = localStorage.getItem('user');
+    if (user) {
+      this.accountService.currentUser.set(JSON.parse(user));
+    }
+    else {
+     return;
+    }
+  }
+
+  getUsers() {
     this.http.get('http://localhost:5069/api/users').subscribe(
       {
         next: response => {
