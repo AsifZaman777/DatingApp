@@ -1,10 +1,27 @@
-<div class="home-container text-center">
-    <h1 class="big-text">Welcome to the Dating App</h1>
-    <p class="lead">Find your perfect match today!</p>
+
+@if(!registerMode)
+{
+  <div class="home-container text-center">
+    <h1 class="big-text">Welcome to the Chatify</h1>
+    <p class="lead">Keep yourself closer to the unknowns</p>
   
     <div class="buttons-container">
-      <button >Register</button>
+      <button (click)="registerToggle()">Register</button>
       <button >Learn More</button>
     </div>
   </div>
+}
+
+@else {
+  <div class="home-container container mt-0">
+    <h1 class="mb-2 text-center">Sign up 🛬</h1>
+    
+    <app-register [usersFromHome]="users"></app-register>
+    
+  </div>
+  
+}
+
+  
+
   

@@ -4,8 +4,14 @@ h3,
 h4,
 h5,
 h6,
+label
 p {
-  color: #ffffff;
+  color: #ffffff; /* White text */
+  text-shadow: 0 0 20px #ff69b4, 
+               0 0 30px #ff69b4, 
+               0 0 40px #ff1493, 
+               0 0 80px #ff1493, 
+               0 0 100px #ff69b4; 
 }
 
 a {
@@ -22,9 +28,15 @@ a:hover {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 90vh;
   background-color: black;
 }
+
+.form-label
+{
+  color: white;
+}
+
 
 button {
   background-color: #ff69b4;
