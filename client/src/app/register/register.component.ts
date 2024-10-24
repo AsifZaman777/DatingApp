@@ -14,7 +14,7 @@ export class RegisterComponent {
   showWarning: boolean = false;
 
   //parent to child communication
-  @Input() usersFromHome: any;
+   usersFromHome = input.required<any>();
 
   hideToastTimeout() {
     setTimeout(() => {
